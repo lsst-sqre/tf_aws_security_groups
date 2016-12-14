@@ -10,7 +10,6 @@ resource "aws_security_group" "internal" {
     self      = true
   }
 
-  # allow all output traffic from the VPC
   egress {
     from_port = 0
     to_port   = 0
@@ -20,6 +19,24 @@ resource "aws_security_group" "internal" {
 
   tags {
     Name = "${var.tag}-internal"
+  }
+}
+
+resource "aws_security_group" "out" {
+  vpc_id      = "${var.vpc_id}"
+  name        = "${var.tag}-out"
+  description = "allow all egress traffic"
+
+  # allow all output traffic from the VPC
+  egress {
+    from_port = 0
+    to_port   = 0
+    protocol  = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags {
+    Name = "${var.tag}-out"
   }
 }
 

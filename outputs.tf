@@ -2,6 +2,10 @@ output "internal_id" {
   value = "${aws_security_group.internal.id}"
 }
 
+output "out_id" {
+  value = "${aws_security_group.out.id}"
+}
+
 output "icmp_id" {
   value = "${aws_security_group.icmp.id}"
 }
